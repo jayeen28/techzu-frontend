@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../styles/comment.module.scss';
 import Avatar from '../../../components/Avatar/Avatar';
+import getTimeAgo from '../../../utils/getTimeAgo';
 
 const Comment = ({ comment }) => {
     return (
@@ -14,7 +15,7 @@ const Comment = ({ comment }) => {
                     <p>{comment.content}</p>
                 </div>
                 <div className={styles.comment_content_bottom}>
-                    <span>1h</span>
+                    <span>{getTimeAgo(comment.createdAt)}</span>
                     <span>Like</span>
                     <span>Dislike</span>
                     <span>Reply</span>
