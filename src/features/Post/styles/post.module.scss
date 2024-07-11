@@ -1,0 +1,76 @@
+@import "../../../styles/variables.scss";
+
+.post_wrapper {
+    box-shadow: 0px 0px 2px #000;
+    padding: .5rem;
+    border-radius: 10px;
+
+    .content {
+        white-space: pre-wrap;
+
+        @include xsm {
+            font-size: .7rem;
+        }
+
+        @include md {
+            font-size: 1rem;
+        }
+
+        .see_more_button {
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+            border: 0;
+
+            @include xsm {
+                font-size: .7rem;
+            }
+
+            @include md {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .author_wrapper {
+        display: flex;
+        gap: 8px;
+
+        .author_avatar_wrapper {
+            width: 50px;
+            height: 50px;
+
+            img {
+                width: 100%;
+                border-radius: 100%;
+            }
+        }
+
+        .author_fullname_wrapper {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            @include xsm {
+                font-size: .6rem;
+            }
+
+            @include md {
+                font-size: 1rem;
+            }
+
+            h4 {
+                margin: 0;
+
+                @include xsm {
+                    margin-bottom: -3px;
+                }
+
+                @include md {
+                    margin-bottom: -5px;
+                }
+            }
+        }
+    }
+}

@@ -15,7 +15,9 @@ const Navbar = ({ children }) => {
                     <Avatar id={avatar_file_id} />
                 </div>
             </div>
-            {children}
+            <div className={styles.navbar_body}>
+                {children}
+            </div>
         </>
     );
 }

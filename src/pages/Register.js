@@ -36,8 +36,8 @@ const Register = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <div className='form_wrapper'>
+            <form onSubmit={handleSubmit(onSubmit)} className='form'>
                 <div style={{ height: '100px', width: '100px', border: '1px solid', borderRadius: '100%', position: 'relative' }}>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                         <label htmlFor='updateProfile' style={{ top: '40%', bottom: '50%' }}>
