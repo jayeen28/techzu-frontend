@@ -4,14 +4,14 @@ import Comment from './Comment';
 import styles from '../styles/comment.module.scss';
 
 const Comments = () => {
-    const commentIds = useSelector((store) => store.commentStore.comments.map(({ _id }) => _id));
+    const comments = useSelector((store) => store.commentStore.comments);
 
     return (
         <div className={styles.comments_wrapper}>
             {
-                commentIds.length > 0 ?
+                comments.length > 1 ?
                     <h4>No comments</h4>
-                    : commentIds.map((commentId) => <Comment commentId={commentId} />)
+                    : comments.map((comment) => <Comment comment={comment} key={comment._id} />)
             }
         </div>
     );

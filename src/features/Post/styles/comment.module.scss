@@ -1,8 +1,28 @@
 .comments_wrapper {
+    flex-grow: 1;
+    height: 100%;
+    overflow: auto;
+
     h4 {
         font-weight: 400;
         margin: 0;
         text-align: center;
-        height: 400px;
+    }
+}
+
+.submitComment {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+
+    textarea {
+        width: 100%;
+        resize: none;
+    }
+
+    .submitCommentIcon {
+        font-size: 30px;
+        cursor: pointer;
     }
 }

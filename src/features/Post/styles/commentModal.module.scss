@@ -2,6 +2,15 @@
     background-color: white;
     border-radius: 5px;
     width: 600px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+
+    .commentModallBottom {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
 
     .commentModalNav {
         position: relative;
