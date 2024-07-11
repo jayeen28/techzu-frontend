@@ -17,6 +17,7 @@ const PrivateRoute = ({ children }) => {
                 .catch(e => console.log(e.message))
                 .finally(() => dispatch(setLoading(false)));
         }
+        else dispatch(setLoading(false));
     }, [dispatch, userId]);
 
     return (
