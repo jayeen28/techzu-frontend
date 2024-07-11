@@ -9,7 +9,7 @@ const Comments = () => {
     return (
         <div className={styles.comments_wrapper}>
             {
-                comments.length > 1 ?
+                comments.length === 0 ?
                     <h4>No comments</h4>
                     : comments.map((comment) => <Comment comment={comment} key={comment._id} />)
             }

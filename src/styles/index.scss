@@ -9,6 +9,20 @@ body {
     margin: 0;
 }
 
+::-webkit-scrollbar {
+    width: .4em;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
 .form_wrapper {
     width: max-content;
     margin: auto;

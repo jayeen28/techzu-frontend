@@ -9,11 +9,12 @@ export default function getTimeAgo(input) {
         m: 60,
         s: 1
     };
-    const secondsElapsed = (date.getTime() - Date.now()) / 1000;
+    const secondsElapsed = Math.abs((date.getTime() - Date.now()) / 1000);
+    if (secondsElapsed < 1) return '0s';
     for (let key in ranges) {
-        if (ranges[key] < Math.abs(secondsElapsed)) {
+        if (ranges[key] < secondsElapsed) {
             const delta = secondsElapsed / ranges[key];
-            return `${Math.abs(Math.floor(delta))}${key}`
+            return `${Math.round(delta)}${key}`
         }
     }
 }

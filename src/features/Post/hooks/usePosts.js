@@ -1,19 +1,22 @@
 import { useEffect } from "react";
 import req from "../../../lib/req";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCommentsWithPagination, setLoading } from "../reducers/commentReducer";
 
 export default function usePosts() {
     const dispatch = useDispatch();
+    const sort = useSelector((store) => store.commentStore.sorting);
+    const { page, limit } = useSelector((store) => store.commentStore.pagination);
 
 
     useEffect(() => {
         dispatch(setLoading(true));
-        req({ uri: '/comment?page=1&limit=5' })
+        const query = new URLSearchParams({ page: page, limit, sort, post: "1" }).toString();
+        req({ uri: `/comment?${query}` })
             .then(({ data }) => dispatch(setCommentsWithPagination(data)))
             .catch((e) => console.log(e.message))
             .finally(() => dispatch(setLoading(false)));
-    }, [dispatch]);
+    }, [dispatch, sort, page, limit]);
 
     return {};
 }
