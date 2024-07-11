@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaComment } from "react-icons/fa";
-import styles from '../styles/comment.module.scss';
+import styles from '../styles/comment.trigger.module.scss';
 import { useSelector } from 'react-redux';
 import { useModal } from '../../../context/ModalProvider';
 import CommentModal from './CommentModal';

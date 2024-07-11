@@ -1,0 +1,23 @@
+.commentModalShell {
+    background-color: white;
+    border-radius: 5px;
+    width: 600px;
+
+    .commentModalNav {
+        position: relative;
+        border-bottom: 1px solid gray;
+
+        h2 {
+            text-align: center;
+            margin: 0;
+        }
+
+        .commentsModalCloseIcon {
+            font-size: 30px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+        }
+    }
+}

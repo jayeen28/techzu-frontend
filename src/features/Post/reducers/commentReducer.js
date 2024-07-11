@@ -12,7 +12,7 @@ export const commentSlice = createSlice({
     reducers: {
         setCommentsWithPagination: (state, action) => {
             const { docs, pagination } = action.payload;
-            state.comments = [...state.comments, docs];
+            state.comments = [...state.comments, ...docs];
             state.pagination = pagination;
         },
         setLoading: (state, action) => {

@@ -1,15 +1,8 @@
 .comments_wrapper {
-    display: flex;
-    justify-content: end;
-
-    .comments_icon_wrapper {
-        display: flex;
-        gap: 4px;
-        width: max-content;
-    }
-
-    .comments_icon_wrapper:hover {
-        text-decoration: underline;
-        cursor: pointer;
+    h4 {
+        font-weight: 400;
+        margin: 0;
+        text-align: center;
+        height: 400px;
     }
 }
