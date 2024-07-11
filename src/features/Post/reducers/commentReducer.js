@@ -26,12 +26,38 @@ export const commentSlice = createSlice({
                 state.comments = [...state.comments, action.payload]
             }
         },
+        addReaction: (state, action) => {
+            const { _id, data } = action.payload;
+            state.comments = state.comments.map((comment) => {
+                if (comment._id === _id) {
+                    comment = {
+                        ...comment,
+                        reactions: [
+                            ...comment.reactions,
+                            data
+                        ]
+                    };
+                    comment[`${data.element}s`] += 1;
+                    return comment;
+                } else return comment;
+            });
+        },
+        removeReaction: (state, action) => {
+            const { _id, data } = action.payload;
+            state.comments = state.comments.map((comment) => {
+                if (comment._id === _id) {
+                    comment.reactions = comment.reactions.filter(r => r.user !== data.userId);
+                    comment[`${data.element}s`] -= 1;
+                    return comment;
+                } else return comment;
+            })
+        },
         setLoading: (state, action) => {
             state.loading = action.payload;
         },
     }
 });
 
-export const { setCommentsWithPagination, setLoading, addComment } = commentSlice.actions;
+export const { setCommentsWithPagination, setLoading, addComment, addReaction, removeReaction } = commentSlice.actions;
 
 export default commentSlice.reducer;
