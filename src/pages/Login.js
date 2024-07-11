@@ -26,8 +26,8 @@ const Login = () => {
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input type='email' placeholder='Your email' required {...register('email')} maxLength={50} />
-                <input type='password' placeholder='Your password' required {...register('password')} minLength={8} />
+                <input type='email' placeholder='Your email' required {...register('email')} />
+                <input type='password' placeholder='Your password' required {...register('password')} minLength={5} maxLength={50} />
                 <button type='submit' disabled={loading}>Login</button>
             </form>
         </div>
