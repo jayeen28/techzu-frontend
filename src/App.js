@@ -1,23 +1,18 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from './components/Toaster';
 import Router from './pages/Router';
-import { Provider as StoreProvider } from 'react-redux';
-import { store } from './store';
-import ModalProvider from './context/ModalProvider';
 import Modal from './components/Modal/Modal';
+import Context from './context/Context';
+import AppLifeCycle from './components/AppLifeCycle';
 
 const App = () => {
     return (
-        <ModalProvider>
-            <StoreProvider store={store}>
-                <BrowserRouter>
-                    <Router />
-                    <Toaster />
-                    <Modal />
-                </BrowserRouter>
-            </StoreProvider>
-        </ModalProvider>
+        <Context>
+            <AppLifeCycle />
+            <Router />
+            <Toaster />
+            <Modal />
+        </Context>
     );
 }
 

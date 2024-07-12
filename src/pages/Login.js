@@ -17,7 +17,7 @@ const Login = () => {
         req({ method: 'POST', uri: '/user/login', data })
             .then(({ data }) => {
                 dispatch(setUser(data));
-                navigate('/posts');
+                navigate('/');
             })
             .catch(() => toast('Credentials are invalid.', 'error'))
             .finally(() => setLoading(false))
