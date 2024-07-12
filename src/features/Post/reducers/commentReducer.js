@@ -7,7 +7,7 @@ const initialState = {
     commentsReloadTrigger: false,
     pagination: {
         page: 1,
-        limit: 1,
+        limit: 20,
         totalDocs: 0,
     },
 };
@@ -18,18 +18,23 @@ export const commentSlice = createSlice({
     reducers: {
         setCommentsWithPagination: (state, action) => {
             const { docs, pagination } = action.payload;
-            state.comments = [...state.comments, ...docs];
+
+            if (pagination.page === 1) {
+                state.comments = docs;
+            } else {
+                const existingCommentIds = new Set(state.comments.map(comment => comment._id));
+                const newDocs = docs.filter(doc => !existingCommentIds.has(doc._id));
+                if (newDocs.length === 0 && state.pagination.hasNextPage) state.pagination = { ...state.pagination, page: state.pagination.page + 1 }
+                else state.comments = [...state.comments, ...newDocs];
+            }
+
             state.pagination = { ...pagination, page: state.pagination.page, limit: state.pagination.limit };
         },
         loadMoreComments: (state) => {
             state.pagination = { ...state.pagination, page: state.pagination.page + 1 };
         },
         addComment: (state, action) => {
-            if (state.sorting.includes('createdAt')) {
-                state.comments = [action.payload, ...state.comments];
-            } else {
-                state.comments = [...state.comments, action.payload]
-            }
+            state.comments = [action.payload, ...state.comments];
             state.pagination.totalDocs += 1;
         },
         removeComment: (state, action) => {

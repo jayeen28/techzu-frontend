@@ -21,14 +21,18 @@ const Comment = ({ comment, userId, handleRemoveComment = () => { }, handleReact
                         <h5>{comment.user.full_name}</h5>
                         <p>{comment.content}</p>
                     </div>
-                    <div className={styles.edit_or_delete_comment_icon_wrapper}>
-                        <Popper holder={<BsThreeDots className={styles.edit_or_delete_comment_icon} title='Edit or delete comment' />}>
-                            <div className={styles.edit_or_delete_popper}>
-                                <div onClick={handleRemoveComment}>Delete</div>
-                                <div>Edit</div>
-                            </div>
-                        </Popper>
-                    </div>
+                    {
+                        comment.user._id === userId ?
+                            <div className={styles.edit_or_delete_comment_icon_wrapper}>
+                                <Popper holder={<BsThreeDots className={styles.edit_or_delete_comment_icon} title='Edit or delete comment' />}>
+                                    <div className={styles.edit_or_delete_popper}>
+                                        <div onClick={handleRemoveComment}>Delete</div>
+                                        <div>Edit</div>
+                                    </div>
+                                </Popper>
+                            </div> :
+                            <></>
+                    }
                 </div>
                 <div className={styles.comment_content_bottom}>
                     <span>{getTimeAgo(comment.createdAt)}</span>

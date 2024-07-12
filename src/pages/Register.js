@@ -20,6 +20,7 @@ const Register = () => {
                 data.avatar_file_id = _id;
             }
             delete data.avatar;
+            delete data.retypedPassword;
             await req({ method: 'POST', uri: '/user/register', data })
         }
         catch (e) {
