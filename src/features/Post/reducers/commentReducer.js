@@ -82,9 +82,13 @@ export const commentSlice = createSlice({
         setLoading: (state, action) => {
             state.loading = action.payload;
         },
+        updateSorting: (state, action) => {
+            state.sorting = action.payload;
+            state.pagination.page = 1;
+        }
     }
 });
 
-export const { setCommentsWithPagination, setLoading, addComment, addReaction, removeReaction, removeComment, loadMoreComments, editComment } = commentSlice.actions;
+export const { setCommentsWithPagination, setLoading, addComment, addReaction, removeReaction, removeComment, loadMoreComments, editComment, updateSorting } = commentSlice.actions;
 
 export default commentSlice.reducer;
