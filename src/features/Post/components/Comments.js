@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Comment from './Comment';
 import styles from '../styles/comment.module.scss';
+import CommentWrapper from './CommentWrapper';
 
 const Comments = () => {
     const comments = useSelector((store) => store.commentStore.comments);
@@ -11,7 +11,7 @@ const Comments = () => {
             {
                 comments.length === 0 ?
                     <h4>No comments</h4>
-                    : comments.map((comment) => <Comment comment={comment} key={comment._id} />)
+                    : comments.map((comment) => <CommentWrapper comment={comment} key={comment._id} />)
             }
         </div>
     );

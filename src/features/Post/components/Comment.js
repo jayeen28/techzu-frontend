@@ -1,17 +1,13 @@
 import React from 'react';
-import { BsThreeDots } from "react-icons/bs";
-import { useSelector } from 'react-redux';
+import styles from '../styles/comment.module.scss';
 import Avatar from '../../../components/Avatar/Avatar';
+import { BsThreeDots } from 'react-icons/bs';
 import Popper from '../../../components/Popper/Popper';
 import getTimeAgo from '../../../utils/getTimeAgo';
-import useComment from '../hooks/useComment';
-import styles from '../styles/comment.module.scss';
 import LikesDislikesCount from './LikesDislikesCount';
+import Reply from './Reply';
 
-
-const Comment = ({ comment }) => {
-    const userId = useSelector((state) => state.userStore.user._id);
-    const { handleRemoveComment, handleReaction } = useComment({ comment, userId });
+const Comment = ({ comment, userId, handleRemoveComment = () => { }, handleReaction = () => { } }) => {
     const { element: myReaction } = comment.reactions.find(r => r.user === userId) || {};
     const { likes, dislikes } = comment;
 

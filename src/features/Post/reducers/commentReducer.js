@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     loading: true,
-    sorting: 'createdAt',
+    sorting: 'createdAt:desc',
     comments: [],
     commentsReloadTrigger: false,
     pagination: {
@@ -21,7 +21,7 @@ export const commentSlice = createSlice({
             state.pagination = { ...pagination, page: state.pagination.page, limit: state.pagination.limit };
         },
         addComment: (state, action) => {
-            if (state.sorting === 'createdAt') {
+            if (state.sorting.includes('createdAt')) {
                 state.comments = [action.payload, ...state.comments];
             } else {
                 state.comments = [...state.comments, action.payload]
