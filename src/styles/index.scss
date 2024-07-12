@@ -1,8 +1,9 @@
 @import "./variables.scss";
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 
 * {
-    font-family: "Poppins", sans-serif;
+    font-family: "Ubuntu", sans-serif;
+    color: $secondary-color;
 }
 
 body {
@@ -24,7 +25,7 @@ body {
     outline: 1px solid slategrey;
 }
 
-.form_wrapper {
+.auth_form_wrapper {
     width: max-content;
     margin: auto;
     height: 100vh;
@@ -32,7 +33,7 @@ body {
     .form {
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 7px;
         height: 70%;
         justify-content: center;
         margin: auto;
@@ -43,4 +44,30 @@ body {
     cursor: pointer;
     color: $primary-color;
     text-decoration: underline;
+}
+
+input {
+    padding: 5px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 4px $primary-color;
+    border: none;
+    outline: none;
+
+    &:focus {
+        outline: 1px solid $primary-color;
+    }
+}
+
+button {
+    background-color: $primary-color;
+    color: $btn-text-color;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.auth_tip {
+    // font-size: 1rem;
 }

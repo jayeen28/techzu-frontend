@@ -41,7 +41,7 @@ const Register = () => {
     };
 
     return (
-        <div className='form_wrapper'>
+        <div className='auth_form_wrapper'>
             <form onSubmit={handleSubmit(onSubmit)} className='form'>
                 <div style={{ height: '100px', width: '100px', border: '1px solid', borderRadius: '100%', position: 'relative' }}>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -67,7 +67,7 @@ const Register = () => {
                 <input type='email' placeholder='Your email' required {...register('email')} />
                 <input type='password' placeholder='Your desired password' required {...register('password')} minLength={5} maxLength={50} />
                 <input type='password' placeholder='Re-type password' required {...register('retypedPassword')} minLength={5} maxLength={50} />
-                <span>Already have an account? Please <span className='link' onClick={() => navigate('/login')}>login</span></span>
+                <small className='auth_tip'>Already have an account? Please <span className='link' onClick={() => navigate('/login')}>login</span></small>
                 <button type='submit' disabled={loading}>Register</button>
             </form>
         </div>

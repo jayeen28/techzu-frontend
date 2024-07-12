@@ -27,11 +27,11 @@ const Login = () => {
     };
 
     return (
-        <div className='form_wrapper'>
+        <div className='auth_form_wrapper'>
             <form onSubmit={handleSubmit(onSubmit)} className='form'>
                 <input type='email' placeholder='Your email' required {...register('email')} />
                 <input type='password' placeholder='Your password' required {...register('password')} minLength={5} maxLength={50} />
-                <span>Don't have an account? Please <span className='link' onClick={() => navigate('/register')}>Register</span></span>
+                <small className='auth_tip'>Don't have an account? Please <span className='link' onClick={() => navigate('/register')}>Register</span></small>
                 <button type='submit' disabled={loading}>Login</button>
             </form>
         </div>
