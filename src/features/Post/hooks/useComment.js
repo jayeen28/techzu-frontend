@@ -31,9 +31,14 @@ export default function useComment({ comment, userId } = {}) {
         return req({ method: 'POST', uri: '/comment/1', data: { content } })
     }
 
+    function updateComment(content) {
+        return req({ method: 'PATCH', uri: `/comment/edit/${comment._id}`, data: { content } })
+    }
+
     return {
         handleRemoveComment,
         handleReaction,
         submitComment,
+        updateComment
     }
 }

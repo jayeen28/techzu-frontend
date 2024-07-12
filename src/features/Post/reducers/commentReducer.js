@@ -37,6 +37,16 @@ export const commentSlice = createSlice({
             state.comments = [action.payload, ...state.comments];
             state.pagination.totalDocs += 1;
         },
+        editComment: (state, action) => {
+            const { _id, content, edited = true } = action.payload;
+            state.comments = state.comments.map((c) => {
+                if (c._id === _id) {
+                    c.content = content;
+                    c.edited = edited;
+                    return c;
+                } else return c;
+            })
+        },
         removeComment: (state, action) => {
             const comments = state.comments.filter(c => c._id !== action.payload);
             state.comments = comments;
@@ -75,6 +85,6 @@ export const commentSlice = createSlice({
     }
 });
 
-export const { setCommentsWithPagination, setLoading, addComment, addReaction, removeReaction, removeComment, loadMoreComments } = commentSlice.actions;
+export const { setCommentsWithPagination, setLoading, addComment, addReaction, removeReaction, removeComment, loadMoreComments, editComment } = commentSlice.actions;
 
 export default commentSlice.reducer;
