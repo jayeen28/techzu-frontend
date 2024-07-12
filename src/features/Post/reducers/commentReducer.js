@@ -4,6 +4,7 @@ const initialState = {
     loading: true,
     sorting: 'createdAt',
     comments: [],
+    commentsReloadTrigger: false,
     pagination: {
         page: 1,
         limit: 10
@@ -25,6 +26,11 @@ export const commentSlice = createSlice({
             } else {
                 state.comments = [...state.comments, action.payload]
             }
+        },
+        removeComment: (state, action) => {
+            const comments = state.comments.filter(c => c._id !== action.payload);
+            state.comments = comments;
+            if (comments.length === 0) state.commentsReloadTrigger = !state.commentsReloadTrigger;
         },
         addReaction: (state, action) => {
             const { _id, data } = action.payload;
@@ -58,6 +64,6 @@ export const commentSlice = createSlice({
     }
 });
 
-export const { setCommentsWithPagination, setLoading, addComment, addReaction, removeReaction } = commentSlice.actions;
+export const { setCommentsWithPagination, setLoading, addComment, addReaction, removeReaction, removeComment } = commentSlice.actions;
 
 export default commentSlice.reducer;

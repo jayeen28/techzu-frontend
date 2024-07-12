@@ -5,7 +5,7 @@ import Avatar from '../../../components/Avatar/Avatar';
 import { toast } from '../../../components/Toaster';
 import req from '../../../lib/req';
 import getTimeAgo from '../../../utils/getTimeAgo';
-import { addReaction, removeReaction } from '../reducers/commentReducer';
+import { addReaction, removeComment, removeReaction } from '../reducers/commentReducer';
 import styles from '../styles/comment.module.scss';
 import { IoIosThumbsUp } from "react-icons/io";
 import { IoIosThumbsDown } from "react-icons/io";
@@ -29,6 +29,15 @@ const Comment = ({ comment }) => {
                 console.log(e.message);
                 toast('Something went wrong!', 'error');
             })
+    };
+
+    function handleRemoveComment() {
+        req({ method: 'DELETE', uri: `/comment/${comment._id}` })
+            .then(() => dispatch(removeComment(comment._id)))
+            .catch(e => {
+                console.log(e.message);
+                toast('Something went wrong!', 'error');
+            })
     }
 
     return (
@@ -45,7 +54,7 @@ const Comment = ({ comment }) => {
                     <div className={styles.edit_or_delete_comment_icon_wrapper}>
                         <Popper holder={<BsThreeDots className={styles.edit_or_delete_comment_icon} title='Edit or delete comment' />}>
                             <div className={styles.edit_or_delete_popper}>
-                                <div>Delete</div>
+                                <div onClick={handleRemoveComment}>Delete</div>
                                 <div>Edit</div>
                             </div>
                         </Popper>
