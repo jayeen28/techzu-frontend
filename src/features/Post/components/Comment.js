@@ -1,11 +1,10 @@
 import React from 'react';
-import styles from '../styles/comment.module.scss';
-import Avatar from '../../../components/Avatar/Avatar';
 import { BsThreeDots } from 'react-icons/bs';
+import Avatar from '../../../components/Avatar/Avatar';
 import Popper from '../../../components/Popper/Popper';
 import getTimeAgo from '../../../utils/getTimeAgo';
+import styles from '../styles/comment.module.scss';
 import LikesDislikesCount from './LikesDislikesCount';
-import Reply from './Reply';
 
 const Comment = ({ comment, userId, handleRemoveComment = () => { }, handleReaction = () => { } }) => {
     const { element: myReaction } = comment.reactions.find(r => r.user === userId) || {};

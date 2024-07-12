@@ -10,6 +10,16 @@
         margin: 0;
         text-align: center;
     }
+
+    .load_more_comments_btn {
+        font-size: .8rem;
+        margin-left: 10px;
+
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
 }
 
 .comment_box_wrapper {

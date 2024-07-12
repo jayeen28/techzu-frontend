@@ -7,7 +7,7 @@ const initialState = {
     commentsReloadTrigger: false,
     pagination: {
         page: 1,
-        limit: 10
+        limit: 1
     },
 };
 
@@ -20,12 +20,16 @@ export const commentSlice = createSlice({
             state.comments = [...state.comments, ...docs];
             state.pagination = { ...pagination, page: state.pagination.page, limit: state.pagination.limit };
         },
+        loadMoreComments: (state) => {
+            state.pagination = { ...state.pagination, page: state.pagination.page + 1 };
+        },
         addComment: (state, action) => {
             if (state.sorting.includes('createdAt')) {
                 state.comments = [action.payload, ...state.comments];
             } else {
                 state.comments = [...state.comments, action.payload]
             }
+            state.pagination.totalDocs += 1;
         },
         removeComment: (state, action) => {
             const comments = state.comments.filter(c => c._id !== action.payload);
@@ -64,6 +68,6 @@ export const commentSlice = createSlice({
     }
 });
 
-export const { setCommentsWithPagination, setLoading, addComment, addReaction, removeReaction, removeComment } = commentSlice.actions;
+export const { setCommentsWithPagination, setLoading, addComment, addReaction, removeReaction, removeComment, loadMoreComments } = commentSlice.actions;
 
 export default commentSlice.reducer;
