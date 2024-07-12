@@ -7,7 +7,8 @@ const initialState = {
     commentsReloadTrigger: false,
     pagination: {
         page: 1,
-        limit: 1
+        limit: 1,
+        totalDocs: 0,
     },
 };
 
@@ -34,6 +35,7 @@ export const commentSlice = createSlice({
         removeComment: (state, action) => {
             const comments = state.comments.filter(c => c._id !== action.payload);
             state.comments = comments;
+            state.pagination.totalDocs -= 1;
             if (comments.length === 0) state.commentsReloadTrigger = !state.commentsReloadTrigger;
         },
         addReaction: (state, action) => {
