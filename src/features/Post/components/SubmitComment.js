@@ -1,21 +1,22 @@
 import React, { useRef, useState } from 'react';
 import { IoSend } from "react-icons/io5";
 import { useDispatch } from 'react-redux';
-import req from '../../../lib/req';
-import styles from '../styles/comment.module.scss';
-import { addComment } from '../reducers/commentReducer';
 import { toast } from '../../../components/Toaster';
+import useComment from '../hooks/useComment';
+import { addComment } from '../reducers/commentReducer';
+import styles from '../styles/comment.module.scss';
 
 const SubmitComment = () => {
     const [loading, setLoading] = useState(false);
     const inputRef = useRef();
     const dispatch = useDispatch();
+    const { submitComment } = useComment();
 
     const handleSubmit = () => {
         const content = inputRef.current.value;
         if (!content) return inputRef.current.focus();
         setLoading(true);
-        req({ method: 'POST', uri: '/comment/1', data: { content } })
+        submitComment(content)
             .then(({ data }) => {
                 dispatch(addComment(data));
                 inputRef.current.value = '';

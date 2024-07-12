@@ -3,7 +3,7 @@ import { toast } from "../../../components/Toaster";
 import req from "../../../lib/req";
 import { addReaction, removeComment, removeReaction } from "../reducers/commentReducer";
 
-export default function useComment({ comment, userId }) {
+export default function useComment({ comment, userId } = {}) {
     const dispatch = useDispatch();
 
     function handleRemoveComment() {
@@ -27,8 +27,13 @@ export default function useComment({ comment, userId }) {
             })
     };
 
+    function submitComment(content) {
+        return req({ method: 'POST', uri: '/comment/1', data: { content } })
+    }
+
     return {
         handleRemoveComment,
         handleReaction,
+        submitComment,
     }
 }
