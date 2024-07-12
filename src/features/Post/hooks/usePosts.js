@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import req from "../../../lib/req";
 import { useDispatch, useSelector } from "react-redux";
-import { addComment, editComment, setCommentsWithPagination, setLoading } from "../reducers/commentReducer";
+import { addComment, editComment, removeComment, setCommentsWithPagination, setLoading } from "../reducers/commentReducer";
 import { useSocket } from "../../../context/SocketProvider";
 
 export default function usePosts() {
@@ -20,18 +20,22 @@ export default function usePosts() {
             .catch((e) => console.log(e.message))
             .finally(() => dispatch(setLoading(false)));
 
-        socket.on('new_comment', (comment) => {
-            if (comment.user._id !== userId) dispatch(addComment(comment));
+        socket.on('new_comment', (comment = {}) => {
+            if (comment.user?._id !== userId) dispatch(addComment(comment));
         });
 
         socket.on('comment_edited', ({ _id, user_id, content } = {}) => {
-            console.log('hit');
             if (user_id !== userId) dispatch(editComment({ content, _id }));
         });
+
+        socket.on('comment_removed', ({ user_id, _id } = {}) => {
+            if (user_id !== userId) dispatch(removeComment(_id));
+        })
 
         return () => {
             socket.off('new_comment');
             socket.off('comment_edited');
+            socket.off('comment_removed');
         }
 
     }, [dispatch, sort, page, limit, commentsReloadTrigger, socket, userId]);
