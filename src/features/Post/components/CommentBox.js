@@ -45,7 +45,7 @@ const CommentBox = ({ comment, setEditMode }) => {
                     Like
                 </span>
                 <span
-                    onClick={() => handleReaction('dislike')}
+                    onClick={() => handleReaction('dislike', myReaction)}
                     style={myReaction ? {
                         cursor: 'not-allowed',
                         textDecoration: 'none',

@@ -3,6 +3,9 @@ import { toast } from "../../../components/Toaster";
 import req from "../../../lib/req";
 import { addReaction, removeComment, removeReaction } from "../reducers/commentReducer";
 
+let reactionDebouncerTimeout;
+const REACTION_DEBOUCE_TIME = 500;
+
 export default function useComment({ comment, userId } = {}) {
     const dispatch = useDispatch();
 
@@ -17,14 +20,17 @@ export default function useComment({ comment, userId } = {}) {
 
     function handleReaction(react, myReaction) {
         if (myReaction) return;
-        dispatch(addReaction({ _id: comment._id, data: { user: userId, element: react } }));
-        req({ method: 'PATCH', uri: `/comment/react/${comment._id}/${react}` })
-            .then(() => { })
-            .catch(e => {
-                dispatch(removeReaction({ _id: comment._id, data: { userId, element: react } }));
-                console.log(e.message);
-                toast('Something went wrong!', 'error');
-            })
+        clearTimeout(reactionDebouncerTimeout);
+        reactionDebouncerTimeout = setTimeout(() => {
+            dispatch(addReaction({ _id: comment._id, data: { user: userId, element: react } }));
+            req({ method: 'PATCH', uri: `/comment/react/${comment._id}/${react}` })
+                .then(() => { })
+                .catch(e => {
+                    dispatch(removeReaction({ _id: comment._id, data: { userId, element: react } }));
+                    console.log(e.message);
+                    toast('Something went wrong!', 'error');
+                })
+        }, REACTION_DEBOUCE_TIME);
     };
 
     function submitComment(content) {
