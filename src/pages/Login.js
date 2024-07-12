@@ -5,17 +5,20 @@ import { toast } from 'react-toastify';
 import { setUser } from '../features/PrivateRoute/reducers/userReducer';
 import req from '../lib/req';
 import { useNavigate } from 'react-router-dom';
+import { useSocket } from '../context/SocketProvider';
 
 const Login = () => {
     const [loading, setLoading] = useState(false);
     const { handleSubmit, register } = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const socket = useSocket();
 
     const onSubmit = (data) => {
         setLoading(true);
         req({ method: 'POST', uri: '/user/login', data })
             .then(({ data }) => {
+                socket.connect();
                 dispatch(setUser(data));
                 navigate('/');
             })
