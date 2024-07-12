@@ -1,10 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { IoSend } from "react-icons/io5";
 import { useDispatch } from 'react-redux';
 import { toast } from '../../../components/Toaster';
 import useComment from '../hooks/useComment';
 import { addComment } from '../reducers/commentReducer';
-import styles from '../styles/comment.module.scss';
+import CommentInput from './CommentInput';
 
 const SubmitComment = () => {
     const [loading, setLoading] = useState(false);
@@ -28,14 +27,7 @@ const SubmitComment = () => {
             .finally(() => setLoading(false));
     };
 
-    return (
-        <div className={styles.submitComment}>
-            <textarea type="text" placeholder='Type your comment' required ref={inputRef} />
-            {
-                loading ? '...' : <IoSend className={styles.submitCommentIcon} onClick={handleSubmit} />
-            }
-        </div>
-    );
+    return (<CommentInput loading={loading} inputRef={inputRef} handleSubmit={handleSubmit} />);
 }
 
 export default SubmitComment;
