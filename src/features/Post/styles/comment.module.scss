@@ -21,6 +21,26 @@
             align-items: center;
 
             .edit_or_delete_comment_icon_wrapper {
+                .edit_or_delete_popper {
+                    background-color: white;
+                    width: 150px;
+                    box-shadow: 0px 0px 5px #000;
+                    border-radius: 15px;
+                    padding: 5px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 6px;
+
+                    div {
+                        padding: 5px;
+                        border-radius: 15px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: #cfcfcf;
+                        }
+                    }
+                }
 
                 .edit_or_delete_comment_icon {
                     cursor: pointer;

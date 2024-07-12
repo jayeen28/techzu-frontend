@@ -9,6 +9,7 @@ import { addReaction, removeReaction } from '../reducers/commentReducer';
 import styles from '../styles/comment.module.scss';
 import { IoIosThumbsUp } from "react-icons/io";
 import { IoIosThumbsDown } from "react-icons/io";
+import Popper from '../../../components/Popper/Popper';
 
 
 const Comment = ({ comment }) => {
@@ -42,7 +43,12 @@ const Comment = ({ comment }) => {
                         <p>{comment.content}</p>
                     </div>
                     <div className={styles.edit_or_delete_comment_icon_wrapper}>
-                        <BsThreeDots className={styles.edit_or_delete_comment_icon} title='Edit or delete comment' />
+                        <Popper holder={<BsThreeDots className={styles.edit_or_delete_comment_icon} title='Edit or delete comment' />}>
+                            <div className={styles.edit_or_delete_popper}>
+                                <div>Delete</div>
+                                <div>Edit</div>
+                            </div>
+                        </Popper>
                     </div>
                 </div>
                 <div className={styles.comment_content_bottom}>

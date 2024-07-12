@@ -1,0 +1,19 @@
+.popper_wrapper {
+    position: relative; // Needed for proper positioning
+}
+
+.popper_holder {
+    cursor: pointer;
+}
+
+.popper_content {
+    position: absolute;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 3px;
+    display: block;
+    z-index: 10000;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+}
