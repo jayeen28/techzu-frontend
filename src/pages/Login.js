@@ -31,6 +31,7 @@ const Login = () => {
             <form onSubmit={handleSubmit(onSubmit)} className='form'>
                 <input type='email' placeholder='Your email' required {...register('email')} />
                 <input type='password' placeholder='Your password' required {...register('password')} minLength={5} maxLength={50} />
+                <span>Don't have an account? Please <span className='link' onClick={() => navigate('/register')}>Register</span></span>
                 <button type='submit' disabled={loading}>Login</button>
             </form>
         </div>

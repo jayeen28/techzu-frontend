@@ -38,3 +38,9 @@ body {
         margin: auto;
     }
 }
+
+.link {
+    cursor: pointer;
+    color: $primary-color;
+    text-decoration: underline;
+}

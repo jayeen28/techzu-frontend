@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import req from '../lib/req';
 import { toast } from '../components/Toaster';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const [loading, setLoading] = useState(false);
     const [avatarDemoURL, setAvatarDemoURL] = useState('https://www.w3schools.com/howto/img_avatar.png');
     const { handleSubmit, register } = useForm();
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         if (data.password !== data.retypedPassword) return toast('Passwords do not match', 'error');
@@ -21,9 +23,11 @@ const Register = () => {
             }
             delete data.avatar;
             delete data.retypedPassword;
-            await req({ method: 'POST', uri: '/user/register', data })
+            await req({ method: 'POST', uri: '/user/register', data });
+            navigate('/login');
         }
         catch (e) {
+            console.log(e.message);
             toast('Something went wrong!', 'error');
         }
         finally {
@@ -63,6 +67,7 @@ const Register = () => {
                 <input type='email' placeholder='Your email' required {...register('email')} />
                 <input type='password' placeholder='Your desired password' required {...register('password')} minLength={5} maxLength={50} />
                 <input type='password' placeholder='Re-type password' required {...register('retypedPassword')} minLength={5} maxLength={50} />
+                <span>Already have an account? Please <span className='link' onClick={() => navigate('/login')}>login</span></span>
                 <button type='submit' disabled={loading}>Register</button>
             </form>
         </div>
