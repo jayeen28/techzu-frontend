@@ -26,10 +26,8 @@
     display: flex;
     margin: 5px 5px 0 5px;
     gap: 4px;
-    min-width: 300px;
 
     .comment_content_wrapper {
-        overflow-wrap: anywhere;
 
         .comment_content_box_wrapper {
             display: flex;
@@ -52,6 +50,7 @@
                     margin: 0;
                     font-size: .8rem;
                     white-space: pre-wrap;
+                    overflow-wrap: break-word;
                     width: 100%;
                 }
             }
