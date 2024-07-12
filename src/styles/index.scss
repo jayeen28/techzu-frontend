@@ -3,15 +3,26 @@
 
 * {
     font-family: "Ubuntu", sans-serif;
-    color: $secondary-color;
+    // color: $secondary-color;
 }
 
 body {
     margin: 0;
 }
 
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $secondary-color;
+}
+
 ::-webkit-scrollbar {
-    width: .4em;
+    width: .2em;
     height: .4em;
 }
 
@@ -44,6 +55,7 @@ body {
     cursor: pointer;
     color: $primary-color;
     text-decoration: underline;
+    font-size: .8rem;
 }
 
 input {
@@ -70,4 +82,8 @@ button {
 
 .auth_tip {
     // font-size: 1rem;
+}
+
+.react-icons {
+    color: $primary-color;
 }

@@ -12,7 +12,9 @@ const CommentModal = () => {
         <div className={styles.commentModalShell}>
             <div className={styles.commentModalNav}>
                 <h2>Comments</h2>
-                <RxCross2 className={styles.commentsModalCloseIcon} onClick={() => closeModal('comments')} />
+                <div className={styles.commentsModalCloseIconWrapper}>
+                    <RxCross2 className={styles.commentsModalCloseIcon} onClick={() => closeModal('comments')} />
+                </div>
             </div>
             <div className={styles.commentModallBottom}>
                 <SortComment />

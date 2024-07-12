@@ -20,7 +20,7 @@ const Navbar = ({ children }) => {
                 <div className={styles.navbar_wrapper}>
                     <div className={styles.navbar_right}>
                         <div>
-                            <button onClick={handleLogout}>Logout</button>
+                            <button onClick={handleLogout}>Log out</button>
                         </div>
                         <Avatar id={avatar_file_id} />
                     </div>

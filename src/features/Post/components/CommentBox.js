@@ -36,25 +36,17 @@ const CommentBox = ({ comment, setEditMode }) => {
                 <span>{getTimeAgo(comment.createdAt)}</span>
                 <span
                     onClick={() => handleReaction('like', myReaction)}
-                    style={myReaction ? {
-                        cursor: 'not-allowed',
-                        textDecoration: 'none',
-                        fontWeight: myReaction === 'like' ? 700 : 'normal'
-                    } : {}}
+                    className={`${myReaction ? styles.disabled : styles.active} ${myReaction === 'like' ? styles.focused : ''}`}
                 >
                     Like
                 </span>
                 <span
                     onClick={() => handleReaction('dislike', myReaction)}
-                    style={myReaction ? {
-                        cursor: 'not-allowed',
-                        textDecoration: 'none',
-                        fontWeight: myReaction === 'dislike' ? 700 : 'normal'
-                    } : {}}
+                    className={`${myReaction ? styles.disabled : styles.active} ${myReaction === 'dislike' ? styles.focused : ''}`}
                 >
                     Dislike
                 </span>
-                <span>Reply</span>
+                <span className={styles.active}>Reply</span>
                 {comment.edited ? <span>Edited</span> : <></>}
                 <LikesDislikesCount likes={comment.likes} dislikes={comment.dislikes} />
             </div>

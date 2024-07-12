@@ -30,9 +30,9 @@ const Post = ({ post }) => {
                 <p className={styles.content}>
                     {showFullContent ? post.content : truncatedContent}
                     {post.content.length > MAX_CONTENT_LENGTH && (
-                        <button className={styles.see_more_button} onClick={handleShowMore}>
+                        <span className='link' onClick={handleShowMore}>
                             {showFullContent ? "Show Less" : "See More"}
-                        </button>
+                        </span>
                     )}
                 </p>
                 <CommentTrigger />
