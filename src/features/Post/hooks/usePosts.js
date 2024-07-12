@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import req from "../../../lib/req";
 import { useDispatch, useSelector } from "react-redux";
-import { addComment, setCommentsWithPagination, setLoading } from "../reducers/commentReducer";
+import { addComment, editComment, setCommentsWithPagination, setLoading } from "../reducers/commentReducer";
 import { useSocket } from "../../../context/SocketProvider";
 
 export default function usePosts() {
@@ -24,8 +24,14 @@ export default function usePosts() {
             if (comment.user._id !== userId) dispatch(addComment(comment));
         });
 
+        socket.on('comment_edited', ({ _id, user_id, content } = {}) => {
+            console.log('hit');
+            if (user_id !== userId) dispatch(editComment({ content, _id }));
+        });
+
         return () => {
             socket.off('new_comment');
+            socket.off('comment_edited');
         }
 
     }, [dispatch, sort, page, limit, commentsReloadTrigger, socket, userId]);

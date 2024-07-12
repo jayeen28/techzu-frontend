@@ -6,6 +6,8 @@ const socketContext = createContext();
 const SocketProvider = ({ children }) => {
 
     const socket = io(process.env.REACT_APP_SOCKET_URL, {
+        reconnection: true,
+        reconnectionDelay: 5000,
         reconnectionDelayMax: 10000,
         withCredentials: true,
         autoConnect: false
