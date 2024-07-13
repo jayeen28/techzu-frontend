@@ -1,6 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './popper.module.scss';
 
+/**
+ * A reusable React component for creating dropdown menus or poppers.
+ *
+ * @prop {React.ReactNode} children - The content to be displayed within the popper.
+ * @prop {React.ReactNode} holder - The content to be displayed as the popper trigger (e.g., a button, icon).
+ * @prop {string} position - The position of the popper relative to the holder. Valid options are: 'top', 'bottom', 'left', or 'right'. Defaults to 'bottom'.
+ * @returns {JSX.Element} - The Popper component JSX element.
+ */
 const Popper = ({ children, holder, position = 'bottom' }) => {
     const [isOpen, setIsOpen] = useState(false);
     const contentRef = useRef(null);
@@ -10,6 +18,12 @@ const Popper = ({ children, holder, position = 'bottom' }) => {
         setIsOpen(!isOpen);
     };
 
+    /**
+     * Handles clicks outside of the specified content area, closing a dropdown or menu.
+     *
+     * @param {MouseEvent} event - The click event object.
+     * @returns {void}
+     */
     const handleClickOutside = (event) => {
         if (
             contentRef.current &&
