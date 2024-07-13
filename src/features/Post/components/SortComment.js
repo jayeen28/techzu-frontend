@@ -39,7 +39,7 @@ const SortComment = () => {
             }>
                 <div className={styles.sortButtonsWrapper}>
                     {
-                        sortButtons.map((data) => <span onClick={() => handleClick(data)}>{data.text}</span>)
+                        sortButtons.map((data) => <span key={data.text} onClick={() => handleClick(data)}>{data.text}</span>)
                     }
                 </div>
             </Popper>
