@@ -80,10 +80,17 @@ button {
     cursor: pointer;
 }
 
-.auth_tip {
-    // font-size: 1rem;
-}
+// .auth_tip {
+//     // font-size: 1rem;
+// }
 
 .react-icons {
     color: $primary-color;
+}
+
+.error_page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
