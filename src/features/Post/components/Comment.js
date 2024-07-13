@@ -4,7 +4,7 @@ import styles from '../styles/comment.module.scss';
 import CommentBox from './CommentBox';
 import EditComment from './EditComment';
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, replyClicked = () => { } }) => {
     const [editMode, setEditMode] = useState(false);
 
     return (
@@ -17,7 +17,7 @@ const Comment = ({ comment }) => {
                     editMode ?
                         <EditComment editMode={editMode} setEditMode={setEditMode} comment={comment} />
                         :
-                        <CommentBox comment={comment} setEditMode={setEditMode} />
+                        <CommentBox comment={comment} setEditMode={setEditMode} replyClicked={replyClicked} />
                 }
             </div>
         </div>

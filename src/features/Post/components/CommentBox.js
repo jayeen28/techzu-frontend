@@ -7,7 +7,7 @@ import Popper from '../../../components/Popper/Popper';
 import { useSelector } from 'react-redux';
 import useComment from '../hooks/useComment';
 
-const CommentBox = ({ comment, setEditMode }) => {
+const CommentBox = ({ comment, setEditMode, replyClicked = () => { } }) => {
     const userId = useSelector((state) => state.userStore.user._id);
     const { handleRemoveComment, handleReaction } = useComment({ comment, userId });
     const { element: myReaction } = comment.reactions.find(r => r.user === userId) || {};
@@ -46,7 +46,7 @@ const CommentBox = ({ comment, setEditMode }) => {
                 >
                     Dislike
                 </span>
-                <span className={styles.active}>Reply</span>
+                {comment.replyOf ? <></> : <span className={styles.active} onClick={replyClicked}>Reply</span>}
                 {comment.edited ? <span>Edited</span> : <></>}
                 <LikesDislikesCount likes={comment.likes} dislikes={comment.dislikes} />
             </div>

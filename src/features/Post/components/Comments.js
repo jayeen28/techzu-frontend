@@ -4,8 +4,8 @@ import { loadMoreComments } from '../reducers/commentReducer';
 import styles from '../styles/comment.module.scss';
 import CommentWrapper from './CommentWrapper';
 
-const Comments = () => {
-    const comments = useSelector((store) => store.commentStore.comments);
+const Comments = ({ replies, noCommentsMessage = true, ...rest } = {}) => {
+    const comments = useSelector((store) => store.commentStore.comments).filter((c) => !c.replyOf);//Loaded main comments from store.
     const hasNextPage = useSelector((store) => store.commentStore.pagination.hasNextPage);
     const dispatch = useDispatch();
 
@@ -14,11 +14,11 @@ const Comments = () => {
     }
 
     return (
-        <div className={styles.comments_wrapper}>
+        <div className={styles.comments_wrapper}{...rest}>
             {
-                comments.length === 0 ?
+                comments.length === 0 && noCommentsMessage ?
                     <h4>No comments</h4>
-                    : comments.map((comment) => <CommentWrapper comment={comment} key={comment._id} />)
+                    : (replies || comments).map((comment) => <CommentWrapper comment={comment} key={comment._id} displayedCommentsCount={comments.length} />)
             }
             {
                 hasNextPage ? <span className={styles.load_more_comments_btn} onClick={loadClicked}>Load more comments</span> : <></>

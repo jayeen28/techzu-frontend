@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { toast } from "../../../components/Toaster";
 import req from "../../../lib/req";
-import { addReaction, removeComment, removeReaction } from "../reducers/commentReducer";
+import { addReaction, addReplies, removeComment, removeReaction } from "../reducers/commentReducer";
 
 let reactionDebouncerTimeout;
 const REACTION_DEBOUCE_TIME = 500;
@@ -33,18 +33,27 @@ export default function useComment({ comment, userId } = {}) {
         }, REACTION_DEBOUCE_TIME);
     };
 
-    function submitComment(content) {
-        return req({ method: 'POST', uri: '/comment/1', data: { content } })
-    }
+    function submitComment(content, replyOf = null) {
+        return req({ method: 'POST', uri: '/comment/1', data: { content, ...replyOf && { replyOf } } })
+    };
 
     function updateComment(content) {
         return req({ method: 'PATCH', uri: `/comment/edit/${comment._id}`, data: { content } })
+    };
+
+    function showReplies(setLoading) {
+        const query = new URLSearchParams({ post: "1", replyOf: comment._id, page: 1, limit: comment.replyCount }).toString();
+        req({ uri: `/comment?${query}` })
+            .then(({ data }) => dispatch(addReplies(data.docs)))
+            .catch((e) => console.log(e.message))
+            .finally(() => setLoading(false));
     }
 
     return {
         handleRemoveComment,
         handleReaction,
         submitComment,
-        updateComment
+        updateComment,
+        showReplies
     }
 }

@@ -5,7 +5,7 @@ import useComment from '../hooks/useComment';
 import { addComment } from '../reducers/commentReducer';
 import CommentInput from './CommentInput';
 
-const SubmitComment = () => {
+const SubmitComment = ({ replyOf }) => {
     const [loading, setLoading] = useState(false);
     const inputRef = useRef();
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const SubmitComment = () => {
         const content = inputRef.current.value;
         if (!content) return inputRef.current.focus();
         setLoading(true);
-        submitComment(content)
+        submitComment(content, replyOf)
             .then(({ data }) => {
                 dispatch(addComment(data));
                 inputRef.current.value = '';

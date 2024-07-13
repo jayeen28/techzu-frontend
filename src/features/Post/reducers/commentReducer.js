@@ -66,6 +66,19 @@ export const commentSlice = createSlice({
         },
 
         /**
+         * Adds a new comment to the beginning of the comments list and updates total document count.
+         *
+         * This reducer handles adding a newly created comment to the state. It prepends the
+         * new comment to the existing list and increments the total number of comments.
+         *
+         * @param {Object} action - The dispatched action object.
+         *   @prop {Object} action.payload - The new comment object.
+         */
+        addReplies: (state, action) => {
+            state.comments = [...state.comments, ...action.payload || []];
+        },
+
+        /**
          * Updates the content and edited flag of a comment in the state based on its ID.
          *
          * This reducer handles editing an existing comment. It iterates through the comments
@@ -178,10 +191,26 @@ export const commentSlice = createSlice({
         updateSorting: (state, action) => {
             state.sorting = action.payload;
             state.pagination.page = 1;
-        }
+        },
+
+        resetReplies: (state) => {
+            state.comments = state.comments.filter(c => !c.replyOf);
+        },
     }
 });
 
-export const { setCommentsWithPagination, setLoading, addComment, addReaction, removeReaction, removeComment, loadMoreComments, editComment, updateSorting } = commentSlice.actions;
+export const {
+    setCommentsWithPagination,
+    setLoading,
+    addComment,
+    addReaction,
+    removeReaction,
+    removeComment,
+    loadMoreComments,
+    editComment,
+    updateSorting,
+    addReplies,
+    resetReplies
+} = commentSlice.actions;
 
 export default commentSlice.reducer;
