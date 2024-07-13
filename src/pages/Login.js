@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
 import { setUser } from '../features/PrivateRoute/reducers/userReducer';
 import req from '../lib/req';
 import { useNavigate } from 'react-router-dom';
 import { useSocket } from '../context/SocketProvider';
+import { toast } from '../components/Toaster';
 
 const Login = () => {
     const [loading, setLoading] = useState(false);

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadMoreComments } from '../reducers/commentReducer';
 import styles from '../styles/comment.module.scss';
 import CommentWrapper from './CommentWrapper';
-import SortComment from './SortComment';
 
 const Comments = () => {
     const comments = useSelector((store) => store.commentStore.comments);
