@@ -33,11 +33,11 @@ const CommentWrapper = ({ comment }) => {
     return (
         <div>
             <Comment comment={comment} replyClicked={replyClicked} />
-            <div>
+            <div className={styles.replies_wrapper}>
                 {
-                    replyLoading ? <span>Loading . . .</span> :
+                    replyLoading ? <span className={`link ${styles.replies_tips}`}>Loading . . .</span> :
                         isRepliesNotLoaded ?
-                            <span className='link' onClick={handleShowReplyClick}>
+                            <span className={`link ${styles.replies_tips}`} onClick={handleShowReplyClick}>
                                 Show {comment.replyCount} replies
                             </span>
                             :

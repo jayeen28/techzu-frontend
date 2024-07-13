@@ -1,11 +1,5 @@
 @import '../../../styles/variables.scss';
 
-.replies {
-    border-left: 1px solid $primary-color;
-    // padding: 0px;
-    // padding-right: 10px;
-}
-
 .comments_wrapper {
     overflow-x: auto;
     padding: 0 10px;
@@ -200,4 +194,12 @@
             }
         }
     }
+}
+
+.replies {
+    border-left: 1px solid $primary-color;
+}
+
+.replies_tips {
+    margin-left: 50px;
 }
