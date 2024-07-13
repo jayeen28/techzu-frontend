@@ -65,6 +65,15 @@ export const commentSlice = createSlice({
             state.pagination.totalDocs += 1;
         },
 
+        addReply: (state, action) => {
+            const comment = action.payload;
+            const existsAny = state.comments.some(c => c.replyOf === comment.replyOf);
+            if (existsAny) state.comments = [...state.comments, comment];
+            else state.comments = state.comments.map(c => {
+                if (c._id === comment.replyOf) c.replyCount++;
+                return c;
+            })
+        },
         /**
          * Adds a new comment to the beginning of the comments list and updates total document count.
          *
@@ -75,6 +84,7 @@ export const commentSlice = createSlice({
          *   @prop {Object} action.payload - The new comment object.
          */
         addReplies: (state, action) => {
+            console.log(action.payload);
             state.comments = [...state.comments, ...action.payload || []];
         },
 
@@ -96,8 +106,8 @@ export const commentSlice = createSlice({
                 if (c._id === _id) {
                     c.content = content;
                     c.edited = edited;
-                    return c;
-                } else return c;
+                }
+                return c;
             })
         },
         /**
@@ -140,8 +150,8 @@ export const commentSlice = createSlice({
                         ]
                     };
                     comment[`${data.element}s`] += 1;
-                    return comment;
-                } else return comment;
+                }
+                return comment;
             });
         },
         /**
@@ -162,8 +172,8 @@ export const commentSlice = createSlice({
                 if (comment._id === _id) {
                     comment.reactions = comment.reactions.filter(r => r.user !== data.userId);
                     comment[`${data.element}s`] -= 1;
-                    return comment;
-                } else return comment;
+                }
+                return comment;
             })
         },
         /**
@@ -192,10 +202,6 @@ export const commentSlice = createSlice({
             state.sorting = action.payload;
             state.pagination.page = 1;
         },
-
-        resetReplies: (state) => {
-            state.comments = state.comments.filter(c => !c.replyOf);
-        },
     }
 });
 
@@ -210,7 +216,7 @@ export const {
     editComment,
     updateSorting,
     addReplies,
-    resetReplies
+    addReply
 } = commentSlice.actions;
 
 export default commentSlice.reducer;

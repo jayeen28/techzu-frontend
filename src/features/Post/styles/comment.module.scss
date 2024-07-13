@@ -1,8 +1,12 @@
 @import '../../../styles/variables.scss';
 
+.replies {
+    border-left: 1px solid $primary-color;
+    // padding: 0px;
+    // padding-right: 10px;
+}
+
 .comments_wrapper {
-    flex-grow: 1;
-    height: 0;
     overflow-x: auto;
     padding: 0 10px;
     padding-right: 30px;

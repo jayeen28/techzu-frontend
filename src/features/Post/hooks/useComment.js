@@ -42,7 +42,7 @@ export default function useComment({ comment, userId } = {}) {
     };
 
     function showReplies(setLoading) {
-        const query = new URLSearchParams({ post: "1", replyOf: comment._id, page: 1, limit: comment.replyCount }).toString();
+        const query = new URLSearchParams({ post: "1", replyOf: comment._id, page: 1, limit: comment.replyCount, sort: 'createdAt:asec' }).toString();
         req({ uri: `/comment?${query}` })
             .then(({ data }) => dispatch(addReplies(data.docs)))
             .catch((e) => console.log(e.message))

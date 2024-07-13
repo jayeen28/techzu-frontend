@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from '../../../components/Toaster';
 import useComment from '../hooks/useComment';
-import { addComment } from '../reducers/commentReducer';
+import { addComment, addReply } from '../reducers/commentReducer';
 import CommentInput from './CommentInput';
 
 const SubmitComment = ({ replyOf }) => {
@@ -10,6 +10,7 @@ const SubmitComment = ({ replyOf }) => {
     const inputRef = useRef();
     const dispatch = useDispatch();
     const { submitComment } = useComment();
+    const commentType = replyOf ? 'reply' : 'comment';
 
     const handleSubmit = () => {
         const content = inputRef.current.value;
@@ -17,7 +18,8 @@ const SubmitComment = ({ replyOf }) => {
         setLoading(true);
         submitComment(content, replyOf)
             .then(({ data }) => {
-                dispatch(addComment(data));
+                if (commentType === 'comment') dispatch(addComment(data));
+                else dispatch(addReply(data));
                 inputRef.current.value = '';
             })
             .catch((e) => {

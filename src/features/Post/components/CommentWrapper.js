@@ -4,6 +4,7 @@ import useComment from '../hooks/useComment';
 import Comment from './Comment';
 import Comments from './Comments';
 import SubmitComment from './SubmitComment';
+import styles from '../styles/comment.module.scss';
 
 let replyBtnDebounce;
 const CommentWrapper = ({ comment }) => {
@@ -40,7 +41,7 @@ const CommentWrapper = ({ comment }) => {
                                 Show {comment.replyCount} replies
                             </span>
                             :
-                            <div>
+                            <div className={styles.replies}>
                                 {/* Recursively call the comments component to use already implemented features. */}
                                 <Comments type='reply' parent={comment._id} noCommentsMessage={false} style={{ height: 'max-content' }} replies={replies} />
                             </div>
