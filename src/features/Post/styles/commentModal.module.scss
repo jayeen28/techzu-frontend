@@ -1,0 +1,55 @@
+@import '../../../styles/variables.scss';
+
+.commentModalShell {
+    background-color: white;
+    border-radius: 5px;
+    width: 600px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+
+    .commentModallBottom {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        overflow-x: scroll;
+    }
+
+    .commentModalNav {
+        position: relative;
+        border-bottom: 1px solid gray;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+
+        h2 {
+            text-align: center;
+            margin: 0;
+        }
+
+        .commentsModalCloseIconWrapper {
+            position: relative;
+
+            .commentsModalCloseIcon {
+                font-size: 30px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                cursor: pointer;
+                color: $secondary-color;
+            }
+        }
+    }
+
+    @include xsm {
+        width: 350px;
+    }
+
+    @include sm {
+        width: 400px;
+    }
+
+    @include md {
+        width: 600px;
+    }
+}
